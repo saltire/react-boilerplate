@@ -7,8 +7,9 @@ module.exports = {
   entry: {
     index: './src/index.jsx',
   },
-  resolve: {
-    extensions: ['.js', '.jsx'],
+  output: {
+    filename: '[name].bundle.js',
+    path: path.resolve(__dirname, 'dist'),
   },
   module: {
     rules: [
@@ -32,6 +33,9 @@ module.exports = {
       },
     ],
   },
+  resolve: {
+    extensions: ['.js', '.jsx'],
+  },
   plugins: [
     new CleanWebpackPlugin(['dist']),
     new HtmlWebpackPlugin({
@@ -39,8 +43,4 @@ module.exports = {
       favicon: './static/favicon.ico',
     }),
   ],
-  output: {
-    filename: '[name].bundle.js',
-    path: path.resolve(__dirname, 'dist'),
-  },
 };

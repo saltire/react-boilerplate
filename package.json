@@ -7,9 +7,8 @@
     "react-dom": "^16.0.0"
   },
   "scripts": {
-    "start": "webpack-dev-server --open --config webpack.dev.js",
-    "watch": "webpack --progress --watch --config webpack.dev.js",
-    "build": "webpack --config webpack.prod.js",
+    "watch": "webpack-dev-server --open --config webpack.dev.js",
+    "build": "webpack -p --config webpack.prod.js",
     "lint": "eslint --ext .js,.jsx ."
   },
   "license": "ISC",
