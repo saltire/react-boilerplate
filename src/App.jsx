@@ -6,12 +6,12 @@ import './App.scss';
 export default function App() {
   return (
     <div className='App'>
-      <header className='App-header'>
-        <h1 className='App-title'>Welcome to React</h1>
+      <header>
+        <h1>React Boilerplate App</h1>
       </header>
-      <p className='App-intro'>
-        To get started, edit <code>src/App.js</code> and save to reload.
-      </p>
+      <main>
+        Edit <code>App.jsx</code> and save to hot reload your changes.
+      </main>
     </div>
   );
 }
