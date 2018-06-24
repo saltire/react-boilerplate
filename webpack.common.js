@@ -1,5 +1,6 @@
-const CleanWebpackPlugin = require('clean-webpack-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CleanPlugin = require('clean-webpack-plugin');
+const HtmlPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const path = require('path');
 
 
@@ -25,7 +26,7 @@ module.exports = {
       },
       {
         test: /\.s?css$/,
-        use: ['style-loader', 'css-loader', 'sass-loader'],
+        use: ['css-hot-loader', MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
       },
       {
         test: /\.(jpe?g|gif|png|eot|svg|ttf|woff2?)$/,
@@ -40,10 +41,11 @@ module.exports = {
     extensions: ['.js', '.jsx'],
   },
   plugins: [
-    new CleanWebpackPlugin(['dist']),
-    new HtmlWebpackPlugin({
+    new CleanPlugin(['dist']),
+    new HtmlPlugin({
       template: './src/index.ejs',
       favicon: './static/favicon.ico',
     }),
+    new MiniCssExtractPlugin(),
   ],
 };
