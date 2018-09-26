@@ -1,28 +1,23 @@
-const CleanPlugin = require('clean-webpack-plugin');
 const HtmlPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const path = require('path');
+const TerserPlugin = require('terser-webpack-plugin');
 
 
 module.exports = {
   entry: {
-    index: './src/index.jsx',
+    index: path.resolve(__dirname, '../src/index.jsx'),
   },
   output: {
     filename: '[name].bundle.js',
-    path: path.resolve(__dirname, 'dist'),
+    path: path.resolve(__dirname, '../dist'),
   },
   module: {
     rules: [
       {
         test: /\.jsx?$/,
         exclude: /node_modules/,
-        use: [{
-          loader: 'babel-loader',
-          options: {
-            presets: ['react', 'env'],
-          },
-        }],
+        use: 'babel-loader',
       },
       {
         test: /\.s?css$/,
@@ -30,21 +25,21 @@ module.exports = {
       },
       {
         test: /\.(jpe?g|gif|png|eot|svg|ttf|woff2?)$/,
-        use: ['file-loader'],
+        use: 'file-loader',
       },
     ],
   },
   optimization: {
+    minimizer: [new TerserPlugin()],
     splitChunks: { chunks: 'all' },
   },
   resolve: {
     extensions: ['.js', '.jsx'],
   },
   plugins: [
-    new CleanPlugin(['dist']),
     new HtmlPlugin({
-      template: './src/index.ejs',
-      favicon: './static/favicon.ico',
+      template: path.resolve(__dirname, '../src/index.ejs'),
+      favicon: path.resolve(__dirname, '../static/favicon.ico'),
     }),
     new MiniCssExtractPlugin(),
   ],
