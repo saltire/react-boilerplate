@@ -4,10 +4,9 @@ module.exports = {
     browser: true,
   },
   rules: {
+    'arrow-parens': [2, 'as-needed', { requireForBlockBody: true }],
     'brace-style': [2, 'stroustrup'],
     'function-paren-newline': 0,
-    'jsx-a11y/label-has-for': 0,
-    'jsx-a11y/label-has-associated-control': [2, {}],
     'jsx-quotes': [2, 'prefer-single'],
     'no-console': 0,
     'no-multi-assign': 0,

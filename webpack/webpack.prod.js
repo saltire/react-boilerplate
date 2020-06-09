@@ -11,4 +11,7 @@ module.exports = merge(common, {
     new CleanPlugin(),
     new OptimizeCssAssetsPlugin(),
   ],
+  stats: {
+    children: false,
+  },
 });
