@@ -1,3 +1,4 @@
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const HtmlPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const path = require('path');
@@ -9,7 +10,7 @@ module.exports = {
     index: path.resolve(__dirname, '../src/index.jsx'),
   },
   output: {
-    filename: '[name].bundle.js',
+    filename: '[name].[contenthash].js',
     path: path.resolve(__dirname, '../dist'),
   },
   module: {
@@ -21,16 +22,22 @@ module.exports = {
       },
       {
         test: /\.s?css$/,
-        use: ['css-hot-loader', MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
+        use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
       },
       {
-        test: /\.(jpe?g|gif|png|eot|svg|ttf|woff2?)$/,
-        use: 'file-loader',
+        test: /\.(jpe?g|gif|png|svg|eot|otf|ttf|woff2?)$/,
+        use: {
+          loader: 'file-loader',
+          options: { name: '[name].[contenthash:8].[ext]' },
+        },
       },
     ],
   },
   optimization: {
-    minimizer: [new TerserPlugin()],
+    minimizer: [
+      new TerserPlugin(),
+      new CssMinimizerPlugin(),
+    ],
     splitChunks: { chunks: 'all' },
   },
   resolve: {
